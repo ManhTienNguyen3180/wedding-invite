@@ -4,23 +4,27 @@ import classNames from "classnames/bind";
 import Days from "./days/days";
 import Infomation from "./infomation";
 import {
-  weddingInfo,
+  groomInfo,
+  brideInfo,
   invitationSection,
-  weddingInfoB,
-  weddingInfoG,
 } from "@/app/configs/ui";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useInView } from "framer-motion";
 
 const cx = classNames.bind(styles);
 
 function Invitation() {
-  const wedInfo = weddingInfo[0];
-  const b = weddingInfoB[0];
-  const g = weddingInfoG[0];
+  const [side, setSide] = useState(null); // null | 'groom' | 'bride'
 
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+
+  const currentInfo = side === "groom" ? groomInfo : brideInfo;
+  const activeDay =
+    side === "groom"
+      ? invitationSection.activeDayGroom
+      : invitationSection.activeDayBride;
+
   return (
     <div className={cx("wrapper")}>
       <h2 className={cx("title")}>Invitation</h2>
@@ -50,31 +54,45 @@ function Invitation() {
           <img className={cx("img")} src={invitationSection[2]} />
         </div>
       </div>
-      <Days title="Tháng 12" activeDay={invitationSection.activeDay} />
-      <div className={cx("info-row")}>
-        <Infomation
-          label="NHÀ TRAI"
-          img={g.img}
-          title={g.title}
-          date={g.date}
-          time={g.time}
-          address={g.address}
-          street={g.street}
-          phone={g.phone}
-          posision={g.posision}
-        />
-        <Infomation
-          label="NHÀ GÁI"
-          img={b.img}
-          title={b.title}
-          date={b.date}
-          time={b.time}
-          address={b.address}
-          street={b.street}
-          phone={b.phone}
-          posision={b.posision}
-        />
+
+      {/* Toggle buttons: Nhà Trai / Nhà Gái */}
+      <div className={cx("side-toggle")}>
+        <span className={cx("side-label")}>Bạn là khách mời của</span>
+        <div className={cx("side-buttons")}>
+          <button
+            className={cx("side-btn", { active: side === "groom" })}
+            onClick={() => setSide("groom")}
+          >
+            Nhà Trai
+          </button>
+          <button
+            className={cx("side-btn", { active: side === "bride" })}
+            onClick={() => setSide("bride")}
+          >
+            Nhà Gái
+          </button>
+        </div>
       </div>
+
+      {/* Only show calendar + info when a side is selected */}
+      {side && (
+        <>
+          <Days title="Tháng 12" activeDay={activeDay} />
+          <div className={cx("info-row")}>
+            <Infomation
+              label={side === "groom" ? "NHÀ TRAI" : "NHÀ GÁI"}
+              img={currentInfo.img}
+              title={currentInfo.title}
+              date={currentInfo.date}
+              time={currentInfo.time}
+              address={currentInfo.address}
+              street={currentInfo.street}
+              phone={currentInfo.phone}
+              posision={currentInfo.posision}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

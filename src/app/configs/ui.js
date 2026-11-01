@@ -121,6 +121,8 @@ const invitationSection = {
     `${cdnLink}/anhdoi.jpg`,
   ],
   activeDay: 22,
+  activeDayGroom: 22,
+  activeDayBride: 21,
 };
 
 // album section
@@ -343,6 +345,8 @@ const metaData = {
 };
 
 export {
+  groomInfo,
+  brideInfo,
   weddingInfo,
   weddingInfoB,
   weddingInfoG,
