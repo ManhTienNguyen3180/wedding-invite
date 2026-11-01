@@ -9,7 +9,6 @@ const cx = classNames.bind(styles);
 function Intro({ handleOpen, name = "You" }) {
   const ref = useRef(null);
 
-  console.log(name);
   return (
     <div className={cx("wrapper")} ref={ref}>
       <div className={cx("block-wrapper")}>
@@ -39,26 +38,32 @@ function Intro({ handleOpen, name = "You" }) {
                 <span className={cx("dear-name")}>{name}</span>
               </div>
             </div>
-            {/* 
-            <img
-              src={images.ring.default.src}
-              alt="ring"
-              className={cx("ring")}
-            /> */}
 
-            {/* <Arrow /> */}
-
-            <motion.button
-              className={cx("btn")}
-              whilehover={{ scale: 1.1 }}
-              whiletap={{ scale: 0.9 }}
-              onClick={handleOpen}
-            >
-              <span className={cx("heart-icon")}>
-                <img className={cx("icon")} src={images.invite.default.src} />
-              </span>
-              Mở thiệp
-            </motion.button>
+            <p className={cx("side-prompt")}>Bạn là khách mời của</p>
+            <div className={cx("side-buttons")}>
+              <motion.button
+                className={cx("btn", "side-btn")}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleOpen("groom")}
+              >
+                <span className={cx("heart-icon")}>
+                  <img className={cx("icon")} src={images.invite.default.src} />
+                </span>
+                Nhà Trai
+              </motion.button>
+              <motion.button
+                className={cx("btn", "side-btn")}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleOpen("bride")}
+              >
+                <span className={cx("heart-icon")}>
+                  <img className={cx("icon")} src={images.invite.default.src} />
+                </span>
+                Nhà Gái
+              </motion.button>
+            </div>
           </div>
         </div>
       </div>

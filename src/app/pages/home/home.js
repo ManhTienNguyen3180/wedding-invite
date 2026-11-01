@@ -23,6 +23,7 @@ export default function Home() {
   const name = searchParams.get("name") || "You";
 
   const [isOpen, setIsOpen] = useState(false);
+  const [side, setSide] = useState(null); // 'groom' | 'bride'
 
   const { dispatch } = useContext(MultiContext);
 
@@ -32,12 +33,10 @@ export default function Home() {
     }
   }, [searchParams]);
 
-  const handleOpenInvitation = () => {
+  const handleOpenInvitation = (selectedSide) => {
+    setSide(selectedSide);
     setIsOpen(true);
     dispatch({ type: "TURN_ON" });
-    if (isOpen === false) {
-      setIsOpen(true);
-    }
   };
 
   useEffect(() => {
@@ -54,12 +53,9 @@ export default function Home() {
         <>
           <Profile />
           <PaperText>
-            “Tình cảm ấy, chẳng cần cứ phải hét to lên cho cả thế giới biết, chỉ
-            cần thủ thỉ cho một người là cả thế giới của mình nghe là đủ rồi.
-            Điều quan trọng nhất là đến cuối đường vẫn còn ở bên nhau, đi cạnh
-            nhau, nắm tay nhau, rung động vì nhau. Cứ thế thôi là đủ rồi!”
+            {"\u201cTình cảm ấy, chẳng cần cứ phải hét to lên cho cả thế giới biết, chỉ cần thủ thỉ cho một người là cả thế giới của mình nghe là đủ rồi. Điều quan trọng nhất là đến cuối đường vẫn còn ở bên nhau, đi cạnh nhau, nắm tay nhau, rung động vì nhau. Cứ thế thôi là đủ rồi!\u201d"}
           </PaperText>
-          <Invitation />
+          <Invitation side={side} />
           <Album name={name}></Album>
           <GuestBook fName={name} />
           <Game />

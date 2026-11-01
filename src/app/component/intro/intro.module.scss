@@ -201,6 +201,23 @@
   margin: 40px;
 }
 
+// Side prompt & buttons
+.side-prompt {
+  margin-top: 16px;
+  font-size: 1.3rem;
+  font-family: Text;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--primary);
+}
+
+.side-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
 .btn {
   width: 120px;
   height: 40px;
@@ -213,7 +230,6 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-top: 20px;
   color: #333;
   border-radius: 12px;
   animation: pulse 2s infinite;
@@ -231,12 +247,26 @@
   }
 }
 
+.side-btn {
+  margin-top: 0;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: none;
+  border: 1.5px solid #ccc;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    animation: pulse 2s infinite;
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+}
+
 @media (max-width: 768px) {
   .block-wrapper {
     height: 90vh;
     margin-bottom: 0;
-    // border-radius: 175px 175px 30px 30px;
-    // padding-bottom: 48px;
   }
 
   .block {
@@ -244,8 +274,6 @@
   }
 
   .left {
-    // margin-top: 40px;
-
     .img-box {
       .img {
         min-width: 0px;
@@ -284,5 +312,18 @@
       font-size: 1.6rem;
       line-height: 1;
     }
+  }
+
+  .side-prompt {
+    font-size: 1.1rem;
+  }
+
+  .side-buttons {
+    gap: 8px;
+  }
+
+  .side-btn {
+    font-size: 1.2rem;
+    padding: 0 8px;
   }
 }
